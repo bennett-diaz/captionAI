@@ -14,4 +14,5 @@ This is the only caption recommender product that is available on iOS and that a
 - https://www.youtube.com/watch?v=FRQtFDDrUXQ&t=117s
 - https://github.com/Nutlope/restorePhotos/tree/1c5c8ac4f52a08f68a3091d3b21be8a65aef71f2
 - https://platform.openai.com/docs/api-reference/chat/create
+- https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html
 
