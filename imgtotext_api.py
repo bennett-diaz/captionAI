@@ -24,7 +24,7 @@ def query_file(model_id, filename):
 def query_url(model_id, image_url):
     api_url = "https://api-inference.huggingface.co/models/" + model_id
 
-    # send a GET request to URL and get imgage in binary format (i.e. bytes)
+    # send a GET request to URL and get image in binary format (i.e. bytes)
     image_data = requests.get(image_url).content
     response = requests.post(api_url, headers=headers, data=image_data)
     listdict = response.json()
