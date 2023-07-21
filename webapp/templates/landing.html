@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CaptionAI - Landing Page</title>
+</head>
+<body>
+    <h1>Welcome to CaptionAI</h1>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form action="/" method="post">
+        <label for="image_url">Enter Image URL:</label>
+        <input type="text" name="image_url" id="image_url" required size="50"> <!-- Increase the size attribute value -->
+        <button type="submit">Get Captions</button>
+    </form>
+</body>
+</html>
