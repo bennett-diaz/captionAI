@@ -26,6 +26,11 @@ def query_url(model_id, image_url):
 
     # send a GET request to URL and get image in binary format (i.e. bytes)
     image_data = requests.get(image_url).content
-    response = requests.post(api_url, headers=headers, data=image_data)
-    listdict = response.json()
-    return listdict[0]["generated_text"]
+
+    # If the model is not ready, wait for it instead of receiving 503.
+    options = {
+        "wait_for_model": True,  # Set to True to wait for the model to load
+    }
+
+    response = requests.post(api_url, headers=headers, data=image_data, params=options)
+    return response.json()
