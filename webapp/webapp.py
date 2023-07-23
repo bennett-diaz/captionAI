@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 # Constants and configurations
 load_dotenv(find_dotenv())
-imgtotext_model = os.getenv("IMAGETOTEXT_MODEL_LARGE")
+imgtotext_model = os.getenv("IMAGETOTEXT_MODEL_SMALL")
 captioner_model = os.getenv("CAPTIONER_MODEL")
 temp = float(os.getenv("TEMPERATURE"))
 num_completions = int(os.getenv("NUM_COMPLETIONS"))
@@ -24,7 +24,7 @@ def process_image(image_url):
     # Generate text summary of the image
     response = imgtotext_api.query_url(imgtotext_model, image_url)
     summary = response[0]["generated_text"]
-    
+
     # Formulate prompt for the caption model
     prompt = captioner_gpt.create_prompt(summary)
 
