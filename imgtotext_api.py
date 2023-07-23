@@ -22,15 +22,26 @@ def query_file(model_id, filename):
 
 
 def query_url(model_id, image_url):
-    api_url = "https://api-inference.huggingface.co/models/" + model_id
+    try:
+        api_url = "https://api-inference.huggingface.co/models/" + model_id
 
-    # send a GET request to URL and get image in binary format (i.e. bytes)
-    image_data = requests.get(image_url).content
+        # send a GET request to URL and get image in binary format (i.e. bytes)
+        image_data = requests.get(image_url).content
 
-    # If the model is not ready, wait for it instead of receiving 503.
-    options = {
-        "wait_for_model": True,  # Set to True to wait for the model to load
-    }
+        # If the model is not ready, wait for it instead of receiving 503.
+        options = {
+            "wait_for_model": True,
+        }
 
-    response = requests.post(api_url, headers=headers, data=image_data, params=options)
-    return response.json()
+        response = requests.post(
+            api_url, headers=headers, data=image_data, params=options
+        )
+        response.raise_for_status()
+        return response.json()
+
+    except requests.exceptions.HTTPError as e:
+        error_message = f"HTTPError {e.response.status_code}: {e.response.content.decode('utf-8')}"
+        raise Exception(error_message)
+
+    except Exception as e:
+        raise Exception(f"Unexpected error: {str(e)}")
