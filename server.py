@@ -3,7 +3,6 @@ import logging
 from dotenv import load_dotenv, find_dotenv
 import captioner_gpt
 import imgtotext_api
-from logging.handlers import RotatingFileHandler
 
 # Set up logging
 logging.getLogger().handlers = []
@@ -32,9 +31,9 @@ sample_url3 = "https://images.unsplash.com/photo-1688890260360-e50f5b17ed55?ixli
 
 # Generate text summary of image
 try:
-    response = imgtotext_api.query_url(imgtotext_model, sample_url3)
+    response = imgtotext_api.inference_url(imgtotext_model, sample_url3)
 except Exception as e:
-    logger.exception("An error occurred in imgtotext_api.query_url: %s", str(e))
+    logger.exception("An error occurred in imgtotext_api.inference_url: %s", str(e))
 
 # Extract summary from API response
 summary = response[0]["generated_text"]
@@ -48,7 +47,6 @@ try:
         captioner_model, prompt, temp, num_completions
     )
 except Exception as e:
-    # Log the exception using the root logger
     logger.exception("An error occurred in captioner_gpt.generate_caption: %s", str(e))
 
 

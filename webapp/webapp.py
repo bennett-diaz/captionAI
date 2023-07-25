@@ -22,7 +22,7 @@ num_completions = int(os.getenv("NUM_COMPLETIONS"))
 # Function to process the image and generate captions
 def process_image(image_url):
     # Generate text summary of the image
-    response = imgtotext_api.query_url(imgtotext_model, image_url)
+    response = imgtotext_api.inference_url(imgtotext_model, image_url)
     summary = response[0]["generated_text"]
 
     # Formulate prompt for the caption model
@@ -49,7 +49,7 @@ def landing_page():
 
 @app.route('/loading')
 def loading_page():
-    # Get the image URL from the query parameters
+    # Get the image URL from the inference parameters
     image_url = request.args.get('image_url')
 
     return render_template('loading.html', image_url=image_url)
@@ -75,7 +75,7 @@ def process_image_route():
 
 @app.route('/results')
 def results_page():
-    # Get the image URL and captions list from the query parameters
+    # Get the image URL and captions list from the inference parameters
     image_url = request.args.get('image_url')
     caption_list = request.args.get('caption_list')
 
