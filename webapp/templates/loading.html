@@ -1,26 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>CaptionAI - Loading</title>
-    <style>
-        /* CSS for the loading animation */
-        .loading {
-            font-size: 24px;
-            margin-top: 20px;
-        }
-
-        .loading::after {
-            content: "...";
-            animation: loadingAnimation 1s infinite;
-        }
-
-        @keyframes loadingAnimation {
-            0% { content: "."; }
-            33% { content: ".."; }
-            66% { content: "..."; }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/static/loading_style.css">
 </head>
+
 <body>
     <h1>Coming right up!</h1>
     <div class="loading">Generating captions for your image URL</div>
@@ -42,7 +27,7 @@
 
                 // Redirect to the Results page with the witty captions
                 window.location.href = '/results?image_url=' + encodeURIComponent(imageUrl) +
-                                      '&caption_list=' + encodeURIComponent(JSON.stringify(response.captions));
+                    '&caption_list=' + encodeURIComponent(JSON.stringify(response.captions));
             } else {
                 // Handle errors if necessary
                 console.error('Error:', xhr.status);
@@ -58,4 +43,5 @@
         xhr.send(JSON.stringify(data));
     </script>
 </body>
+
 </html>

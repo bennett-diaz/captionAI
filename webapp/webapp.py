@@ -9,13 +9,12 @@ sys.path.append('..')
 from captionAI import captioner_gpt
 from captionAI import imgtotext_api
 
-
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # Constants and configurations
 load_dotenv(find_dotenv())
-imgtotext_model = os.getenv("IMAGETOTEXT_MODEL_SMALL")
-captioner_model = os.getenv("CAPTIONER_MODEL")
+imgtotext_model = os.getenv("IMGTXT_MODEL_GITBASE")
+captioner_model = os.getenv("CAPTIONER_MODEL_GPT")
 temp = float(os.getenv("TEMPERATURE"))
 num_completions = int(os.getenv("NUM_COMPLETIONS"))
 
@@ -89,3 +88,5 @@ def results_page():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    # c = process_image("https://images.unsplash.com/photo-1689758410578-574c8f9eff2b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80")
+    # print(c)

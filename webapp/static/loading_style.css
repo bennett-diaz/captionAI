@@ -1,0 +1,28 @@
+/* CSS for the loading animation */
+.loading {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.loading::after {
+    content: "...";
+    animation: loadingAnimation 1s infinite;
+}
+
+@keyframes loadingAnimation {
+    0% { content: "."; }
+    33% { content: ".."; }
+    66% { content: "..."; }
+}
+
+/* Additional styles for the loading page */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+/* You can add more styles as needed for better page layout and design */
