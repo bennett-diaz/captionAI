@@ -34,7 +34,9 @@ sample_url3 = "https://images.unsplash.com/photo-1688890260360-e50f5b17ed55?ixli
 try:
     response = imgtotext_api.inference_url(imgtotext_model, sample_url3)
 except Exception as e:
-    logger.exception("A FATAL error occurred in imgtotext_api.inference_url: %s", str(e))
+    logger.exception(
+        "A FATAL error occurred in imgtotext_api.inference_url: %s", str(e)
+    )
     sys.exit(1)
 
 # Extract summary from API response
