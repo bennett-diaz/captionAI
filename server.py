@@ -1,5 +1,6 @@
 import os
 import logging
+import sys
 from dotenv import load_dotenv, find_dotenv
 import captioner_gpt
 import imgtotext_api
@@ -18,8 +19,8 @@ logger.info("*")
 
 # Constants and configurations
 load_dotenv(find_dotenv())
-imgtotext_model = os.getenv("IMAGETOTEXT_MODEL_SMALL")
-captioner_model = os.getenv("CAPTIONER_MODEL")
+imgtotext_model = os.getenv("IMGTXT_MODEL_BLIPLARGE")
+captioner_model = os.getenv("CAPTIONER_MODEL_GPT")
 temp = float(os.getenv("TEMPERATURE"))
 num_completions = int(os.getenv("NUM_COMPLETIONS"))
 
@@ -33,7 +34,8 @@ sample_url3 = "https://images.unsplash.com/photo-1688890260360-e50f5b17ed55?ixli
 try:
     response = imgtotext_api.inference_url(imgtotext_model, sample_url3)
 except Exception as e:
-    logger.exception("An error occurred in imgtotext_api.inference_url: %s", str(e))
+    logger.exception("A FATAL error occurred in imgtotext_api.inference_url: %s", str(e))
+    sys.exit(1)
 
 # Extract summary from API response
 summary = response[0]["generated_text"]
