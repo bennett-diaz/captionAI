@@ -17,7 +17,7 @@ def inference_file(model_id, filename):
 
     with open(filename, "rb") as f:
         data = f.read()
-    response = requests.post(api_url, headers=headers, data=data)
+    response = requests.post(api_url, headers=headers, data=data, timeout=8)
     return json.loads(response.content.decode("utf-8"))
 
 
@@ -32,31 +32,27 @@ def inference_url(model_id, image_url):
         response.raise_for_status()
         return response.json()
 
-    except requests.exceptions.HTTPError as e:
-        error_message = (
-            f"HTTPError {e.response.status_code}: {e.response.content.decode('utf-8')}"
-        )
+    except requests.exceptions.HTTPError as error:
+        error_message = f"HTTPError {e.response.status_code}: {error.response.content.decode('utf-8')}"
 
         # path if model has not yet deployed to Inference API
-        if "estimated_time" in e.response.json():
-            retries = 5
-            load_time = e.response.json()["estimated_time"]
+        if "estimated_time" in error.response.json():
+            load_time = error.response.json()["estimated_time"]
             retry_time = load_time / 2
+            retries = 5
+            retry = 0
+            while retry < retries:
+                try:
+                    time.sleep(retry_time)
+                    response = requests.post(
+                        api_url, headers=headers, data=img, timeout=load_time
+                    )
+                    response.raise_for_status()
+                    return response.json()
+                except requests.exceptions.HTTPError:
+                    retry += 1
+
+            raise Exception(f"Model did not become available within {retries} retries.")
 
         else:
             raise Exception(error_message)
-
-    retries = 5
-    retry = 0
-    while retry < retries:
-        try:
-            time.sleep(retry_time)
-            response = requests.post(
-                api_url, headers=headers, data=img, timeout=load_time
-            )
-            response.raise_for_status()
-            return response.json()
-        except requests.exceptions.HTTPError as e:
-            retry += 1
-
-    raise Exception(f"Model did not become available within {retries} retries.")
