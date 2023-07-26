@@ -3,45 +3,13 @@
 
 <head>
     <title>CaptionAI - Loading</title>
-    <link rel="stylesheet" type="text/css" href="/static/loading_style.css">
+    <link rel="stylesheet" type="text/css" href="static/loading.css">
 </head>
 
 <body>
     <h1>Coming right up!</h1>
     <div class="loading">Generating captions for your image URL</div>
-
-    <script>
-        // Get the image URL from the HTML element
-        const imageUrl = "{{ image_url }}";
-
-        // Create an HTTP request to the backend
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/process_image', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
-        // Define a callback function to handle the response from the backend
-        xhr.onload = function () {
-            if (xhr.status === 200) {
-                // Parse the response data (assuming it's JSON)
-                const response = JSON.parse(xhr.responseText);
-
-                // Redirect to the Results page with the witty captions
-                window.location.href = '/results?image_url=' + encodeURIComponent(imageUrl) +
-                    '&caption_list=' + encodeURIComponent(JSON.stringify(response.captions));
-            } else {
-                // Handle errors if necessary
-                console.error('Error:', xhr.status);
-            }
-        };
-
-        // Prepare the request data (if needed)
-        const data = {
-            image_url: imageUrl
-        };
-
-        // Send the request to the backend
-        xhr.send(JSON.stringify(data));
-    </script>
+    <script src="static/loading.js"></script>
 </body>
 
 </html>
