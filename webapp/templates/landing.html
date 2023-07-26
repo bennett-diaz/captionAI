@@ -2,16 +2,19 @@
 <html>
 <head>
     <title>CaptionAI - Landing Page</title>
+    <link rel="stylesheet" type="text/css" href="/static/landing.css">
 </head>
 <body>
-    <h1>Welcome to CaptionAI</h1>
-    {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
-    {% endif %}
-    <form action="/" method="post">
-        <label for="image_url">Enter Image URL:</label>
-        <input type="text" name="image_url" id="image_url" required size="50"> 
-        <button type="submit">Get Captions</button>
-    </form>
+    <div class="container">
+        <h1>Welcome to CaptionAI</h1>
+        {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+        <form action="/" method="post" class="form">
+            <label for="image_url">Enter Image URL:</label>
+            <input type="url" name="image_url" id="image_url" required placeholder="https://example.com/image.jpg" size="50"> 
+            <button type="submit" class="submit-button">Get Captions</button>
+        </form>
+    </div>
 </body>
 </html>

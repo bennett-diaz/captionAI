@@ -1,8 +1,3 @@
-function getImageUrl() {
-    // Get the image URL from the HTML element
-    return document.getElementById("imageUrl").textContent;
-}
-
 function processImage() {
     // Get the image URL from the URL parameters
     const imageUrl = window.location.search.substring(1).split('&')[0].split('=')[1];

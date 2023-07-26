@@ -7,9 +7,22 @@
 </head>
 
 <body>
-    <h1>Coming right up!</h1>
-    <div class="loading">Generating captions for your image URL</div>
+    <div class="container">
+        <h1 class="loading-title">Coming right up!</h1>
+        <div class="loading-text">Generating captions for your image URL</div>
+    </div>
     <script src="static/loading.js"></script>
+
+    <div class="log-container">
+        <h2>System logs:</h2>
+        <!-- Placeholder for backend logs -->
+        <p>127.0.0.1 - - [26/Jul/2023 16:09:31] "POST / HTTP/1.1" 302 -</p>
+        <p>127.0.0.1 - - [26/Jul/2023 16:09:31] "GET /loading?image_url=https://images.unsplash.com/photo-1689616977225-bf0ab4ae1ac5?ixlib%3Drb-4.0.3%26ixid%3DM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%253D%253D%26auto%3Dformat%26fit%3Dcrop%26w%3D1036%26q%3D80 HTTP/1.1" 200 -</p>
+        <p>127.0.0.1 - - [26/Jul/2023 16:09:31] "GET /static/loading.css HTTP/1.1" 304 -</p>
+        <p>127.0.0.1 - - [26/Jul/2023 16:09:31] "GET /static/loading.js HTTP/1.1" 304 -</p>
+        <p>127.0.0.1 - - [26/Jul/2023 16:09:34] "POST /process_image HTTP/1.1" 200 -</p>
+        <p>127.0.0.1 - - [26/Jul/2023 16:09:34] "GET /results?image_url=https://images.unsplash.com/photo-1689616977225-bf0ab4ae1ac5?ixlib%253Drb-4.0.3%2526ixid%253DM3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%25253D%25253D%2526auto%253Dformat%2526fit%253Dcrop%2526w%253D1036%2526q%253D80&caption_list=[{"created":1690405775,"finish_reason":"stop","index":0,"message_content":"\\"Lost%20in%20the%20mystical%20embrace%20of%20nature's%20whispers%20🌲✨\\"","model":"gpt-3.5-turbo-0613"},{"created":1690405775,"finish_reason":"stop","index":1,"message_content":"\\"Lost%20in%20the%20enchantment%20of%20misty%20woods.\\"","model":"gpt-3.5-turbo-0613"},{"created":1690405775,"finish_reason":"stop","index":2,"message_content":"\\"Lost%20in%20the%20mystical%20wonders%20of%20nature's%20embrace.%20🌲✨%20%23IntoTheMist\\"","model":"gpt-3.5-turbo-0613"}] HTTP/1.1" 200 -</p>
+    </div>
 </body>
 
 </html>
