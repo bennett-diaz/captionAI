@@ -18,19 +18,6 @@ captioner_model = os.getenv("CAPTIONER_MODEL_GPT")
 temp = float(os.getenv("TEMPERATURE"))
 num_completions = int(os.getenv("NUM_COMPLETIONS"))
 
-# Function to process the image and generate captions
-def process_image(image_url):
-    # Generate text summary of the image
-    response = imgtotext_api.inference_url(imgtotext_model, image_url)
-    summary = response[0]["generated_text"]
-
-    # Formulate prompt for the caption model
-    prompt = captioner_gpt.create_prompt(summary)
-
-    # Request captions from GPT
-    caption_list = captioner_gpt.generate_caption(captioner_model, prompt, temp, num_completions)
-    return caption_list
-
 @app.route('/', methods=['GET', 'POST'])
 def landing_page():
     if request.method == 'POST':
@@ -85,6 +72,19 @@ def results_page():
         return render_template('results.html', image_url=image_url, caption_list=caption_list)
 
     return jsonify({'error': 'Invalid request.'}), 400
+
+# Function to process the image and generate captions
+def process_image(image_url):
+    # Generate text summary of the image
+    response = imgtotext_api.inference_url(imgtotext_model, image_url)
+    summary = response[0]["generated_text"]
+
+    # Formulate prompt for the caption model
+    prompt = captioner_gpt.create_prompt(summary)
+
+    # Request captions from GPT
+    caption_list = captioner_gpt.generate_caption(captioner_model, prompt, temp, num_completions)
+    return caption_list
 
 if __name__ == '__main__':
     app.run(debug=True)

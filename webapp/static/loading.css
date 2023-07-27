@@ -5,42 +5,48 @@ body {
     padding: 0;
 }
 
-/* Add styles for the container */
+/* Container Styles */
 .container {
-    background-color: #fff;
-    padding: 20px;
     max-width: 800px;
-    margin: 0 auto; /* Center the container horizontally */
-    margin-top: 20px; /* Add some top margin to move the container down */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Add styles for the log container */
+/* Heading Styles */
+h1 {
+    text-align: center;
+    color: #007bff; /* Blue color */
+}
+
+/* Loading Styles */
+.loading-text-container {
+    text-align: center;
+    margin-top: 40px; /* Add margin to match landing page */
+}
+
 .log-container {
-    display: none; /* Hide the log container */
+    display: none;
     background-color: #fff;
     padding: 20px;
     max-width: 800px;
-    margin: 0 auto; /* Center the container horizontally */
-    margin-top: 20px; /* Add some top margin to move the container down */
+    margin: 20px auto 0; /* Center horizontally and add top margin */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    white-space: pre-wrap; /* Allow the text to wrap within the container */
+    white-space: pre-wrap;
 }
 
-/* Style for the "Coming right up!" heading */
 .loading-title {
     font-size: 32px;
     font-weight: bold;
     color: #007bff; /* Blue color */
     margin: 0;
+    margin-bottom: 20px; /* Add margin between the heading and loading text */
 }
 
-/* Style for the "Generating captions for your image URL" text */
 .loading-text {
     font-size: 18px;
     color: #333;
     margin-top: 10px;
 }
-
