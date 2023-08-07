@@ -33,7 +33,10 @@ def inference_url(model_id, image_url):
         return response.json()
 
     except requests.exceptions.HTTPError as err:
-        error_message = f"HTTPError {err.response.status_code}: {err.response.content.decode('utf-8')}"
+        current_filename = os.path.basename(__file__)
+        error_message = (
+            f"HTTPError in {current_filename}: {err.response.status_code}: {err.response.content.decode('utf-8')}"
+        )
 
         # path if model has not yet deployed to Inference API
         if "estimated_time" in err.response.json():

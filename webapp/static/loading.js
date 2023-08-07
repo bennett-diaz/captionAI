@@ -30,13 +30,24 @@ function processImage() {
                 // Handle JSON parsing error
                 console.error('Error parsing JSON response:', error);
             }
+        } else if (xhr.status === 400) {
+            try {
+                const errorResponse = JSON.parse(xhr.responseText);
+                const errorMessage = errorResponse.error || 'An error occurred';
+                window.location.href = '/error?error_message=' + encodeURIComponent(errorMessage);
+            } catch (error) {
+                console.error('Error handling error response:', error);
+            }
+        
+        // delete this
+
         } else {
             // Handle errors if necessary
             console.error('Error:', xhr.status);
     
             // Redirect to the error page or display an error message to the user
-            // Example:
-            window.location.href = '/error?error_message=' + encodeURIComponent('Sample bad request error');
+            // The ? indicates the start of query parameters in the URL.
+            window.location.href = '/error?error_message=' + encodeURIComponent('Other error');
         }
     };
 }
