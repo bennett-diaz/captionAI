@@ -32,12 +32,12 @@ def inference_url(model_id, image_url):
         response.raise_for_status()
         return response.json()
 
-    except requests.exceptions.HTTPError as error:
-        error_message = f"HTTPError {e.response.status_code}: {error.response.content.decode('utf-8')}"
+    except requests.exceptions.HTTPError as err:
+        error_message = f"HTTPError {err.response.status_code}: {err.response.content.decode('utf-8')}"
 
         # path if model has not yet deployed to Inference API
-        if "estimated_time" in error.response.json():
-            load_time = error.response.json()["estimated_time"]
+        if "estimated_time" in err.response.json():
+            load_time = err.response.json()["estimated_time"]
             retry_time = load_time / 2
             retries = 5
             retry = 0

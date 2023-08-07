@@ -40,5 +40,5 @@ def generate_caption(mod, msg, temp, num_completions):
             caption_list.append(choice_data)
         return caption_list
 
-    except Exception as e:
-        raise e
+    except Exception as err:
+        raise err
