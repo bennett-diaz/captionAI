@@ -19,7 +19,7 @@ logger.info("*")
 
 # Constants and configurations
 load_dotenv(find_dotenv())
-imgtotext_model = os.getenv("IMGTXT_MODEL_BLIPLARGE")
+imgtotext_model = os.getenv("IMGTXT_MODEL_GITLARGE")
 captioner_model = os.getenv("CAPTIONER_MODEL_GPT")
 temp = float(os.getenv("TEMPERATURE"))
 num_completions = int(os.getenv("NUM_COMPLETIONS"))
@@ -33,9 +33,9 @@ sample_url3 = "https://images.unsplash.com/photo-1688890260360-e50f5b17ed55?ixli
 # Generate text summary of image
 try:
     response = imgtotext_api.inference_url(imgtotext_model, sample_url3)
-except Exception as e:
+except Exception rr:
     logger.exception(
-        "A FATAL error occurred in imgtotext_api.inference_url: %s", str(e)
+        "A FATAL error occurred in imgtotext_api.inference_url: %s", str(err)
     )
     sys.exit(1)
 
@@ -50,8 +50,8 @@ try:
     caption_list = captioner_gpt.generate_caption(
         captioner_model, prompt, temp, num_completions
     )
-except Exception as e:
-    logger.exception("An error occurred in captioner_gpt.generate_caption: %s", str(e))
+except Exception as err:
+    logger.exception("An error occurred in captioner_gpt.generate_caption: %s", str(err))
 
 
 # Display captions to the user
