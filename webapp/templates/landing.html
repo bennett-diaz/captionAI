@@ -9,6 +9,7 @@
         <h1>Welcome to CaptionAI</h1>
         {% if error_message %}
             <p class="error-message">{{ error_message }}</p>
+            <p>Error message: {{ error_message }}</p>
         {% endif %}
         <form action="/" method="post" class="form">
             <label for="image_url">Enter Image URL:</label>

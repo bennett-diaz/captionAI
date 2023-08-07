@@ -28,8 +28,9 @@ def landing_page():
                 # Redirect to the loading page with the image URL
                 return redirect(url_for('loading_page', image_url=image_url))
 
-            except Exception as e:
-                return render_template('landing.html', error_message='Failed to process the image.')
+            except Exception as err:
+                error_message = 'Failed to process the image. ' + str(err)
+                return render_template('landing.html', error_message=error_message)
 
     return render_template('landing.html', error_message=None)
 
@@ -54,9 +55,10 @@ def process_image_route():
                 # Return the captions as a JSON response
                 return jsonify({'captions': caption_list})
 
-            except Exception as e:
-                return jsonify({'error': 'Failed to process the image.'}), 500
-
+            except Exception as err:
+                error_message = 'Failed to process the image. ' + str(err)
+                return jsonify({'error': error_message}), 400  # Return an error JSON response
+                
     return jsonify({'error': 'Invalid request.'}), 400
 
 @app.route('/results')
@@ -73,18 +75,28 @@ def results_page():
 
     return jsonify({'error': 'Invalid request.'}), 400
 
+@app.route('/error')
+def error_page():
+    # Get the error message from the query parameters
+    error_message = request.args.get('error_message')
+    print('Error message!', error_message)
+    return render_template('error.html', error_message=error_message)
+
 # Function to process the image and generate captions
 def process_image(image_url):
-    # Generate text summary of the image
-    response = imgtotext_api.inference_url(imgtotext_model, image_url)
-    summary = response[0]["generated_text"]
+    try:
+        # Generate text summary of the image
+        response = imgtotext_api.inference_url(imgtotext_model, image_url)
+        summary = response[0]["generated_text"]
 
-    # Formulate prompt for the caption model
-    prompt = captioner_gpt.create_prompt(summary)
+        # Formulate prompt for the caption model
+        prompt = captioner_gpt.create_prompt(summary)
 
-    # Request captions from GPT
-    caption_list = captioner_gpt.generate_caption(captioner_model, prompt, temp, num_completions)
-    return caption_list
+        # Request captions from GPT
+        caption_list = captioner_gpt.generate_caption(captioner_model, prompt, temp, num_completions)
+        return caption_list
+    except Exception as e:
+        raise Exception('Error processing image: {}'.format(str(e)))
 
 if __name__ == '__main__':
     app.run(debug=True)
