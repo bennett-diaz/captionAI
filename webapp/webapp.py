@@ -56,10 +56,10 @@ def process_image_route():
                 return jsonify({'captions': caption_list})
 
             except Exception as err:
-                error_message = 'Failed to process the image. ' + str(err)
-                return jsonify({'error': error_message}), 400  # Return an error JSON response
+                error_message = 'Error in process_image/\n' + str(err)
+                return jsonify({'error': error_message}), 400 
                 
-    return jsonify({'error': 'Invalid request.'}), 400
+    return jsonify({'error': 'Error in process_image/\n'}), 400
 
 @app.route('/results')
 def results_page():
@@ -95,8 +95,8 @@ def process_image(image_url):
         # Request captions from GPT
         caption_list = captioner_gpt.generate_caption(captioner_model, prompt, temp, num_completions)
         return caption_list
-    except Exception as e:
-        raise Exception('Error processing image: {}'.format(str(e)))
+    except Exception as err:
+        raise Exception('Error in module/\n {}'.format(str(err)))
 
 if __name__ == '__main__':
     app.run(debug=True)

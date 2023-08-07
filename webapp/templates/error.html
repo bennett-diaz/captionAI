@@ -13,7 +13,7 @@
     </div>
 
     <div class="error-log-container">
-        <h2>System logs:</h2>
+        {{error_message | default('An unknown error occurred.') }}
     </div>
 </body>
 

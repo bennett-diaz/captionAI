@@ -41,4 +41,6 @@ def generate_caption(mod, msg, temp, num_completions):
         return caption_list
 
     except Exception as err:
-        raise err
+        current_filename = os.path.basename(__file__)
+        error_message = f"Error in {current_filename}: {err}"
+        raise Exception(error_message)
