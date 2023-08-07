@@ -16,11 +16,11 @@ body {
 
 
 /* Loading Styles */
-.loading-text-container {
+.error-text-container {
     margin-top: 40px; /* Add margin to match landing page */
 }
 
-.log-container {
+.error-log-container {
     display: none;
     background-color: #fff;
     padding: 20px;
@@ -31,16 +31,16 @@ body {
     white-space: pre-wrap;
 }
 
-.loading-title {
+.error-title {
     font-size: 32px;
     font-weight: bold;
-    color: #007bff; /* Blue color */
+    color: #ff1100;
     margin: 0;
     margin-bottom: 20px; /* Add margin between the heading and loading text */
     text-align: center;
 }
 
-.loading-text {
+.error-text {
     font-size: 18px;
     color: #333;
     margin-top: 10px;

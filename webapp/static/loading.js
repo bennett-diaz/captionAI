@@ -19,14 +19,24 @@ function processImage() {
     xhr.onload = function () {
         if (xhr.status === 200) {
             // Parse the response data (assuming it's JSON)
-            const response = JSON.parse(xhr.responseText);
-
-            // Redirect to the Results page with the witty captions
-            window.location.href = '/results?image_url=' + encodeURIComponent(imageUrl) +
-                '&caption_list=' + encodeURIComponent(JSON.stringify(response.captions));
+            try {
+                console.log(xhr.responseText);
+                const response = JSON.parse(xhr.responseText);
+    
+                // Redirect to the Results page with the witty captions
+                window.location.href = '/results?image_url=' + encodeURIComponent(imageUrl) +
+                    '&caption_list=' + encodeURIComponent(JSON.stringify(response.captions));
+            } catch (error) {
+                // Handle JSON parsing error
+                console.error('Error parsing JSON response:', error);
+            }
         } else {
             // Handle errors if necessary
             console.error('Error:', xhr.status);
+    
+            // Redirect to the error page or display an error message to the user
+            // Example:
+            window.location.href = '/error?error_message=' + encodeURIComponent('Sample bad request error');
         }
     };
 }

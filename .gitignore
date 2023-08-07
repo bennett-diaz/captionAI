@@ -1,7 +1,11 @@
 # Custom
 .env
 notes.txt
+nextsteps.txt
 .DS_Store
+helper.py
+demo.py
+sample_images/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
