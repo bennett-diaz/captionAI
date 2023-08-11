@@ -50,10 +50,10 @@ def process_image_route():
         if image_url:
             try:
                 # Process the image and generate captions
-                caption_list = process_image(image_url)
+                summary, caption_list = process_image(image_url)
 
                 # Return the captions as a JSON response
-                return jsonify({'captions': caption_list})
+                return jsonify({'summary': summary, 'captions': caption_list})
 
             except Exception as err:
                 error_message = 'Error in process_image/\n' + str(err)
@@ -87,14 +87,16 @@ def process_image(image_url):
     try:
         # Generate text summary of the image
         response = imgtotext_api.inference_url(imgtotext_model, image_url)
-        summary = response[0]["generated_text"]
+        summary_str = response.text
+        summary_dict = json.loads(summary_str)
+        summary = summary_dict[0]['generated_text']
 
         # Formulate prompt for the caption model
         prompt = captioner_gpt.create_prompt(summary)
 
         # Request captions from GPT
         caption_list = captioner_gpt.generate_caption(captioner_model, prompt, temp, num_completions)
-        return caption_list
+        return summary, caption_list
     except Exception as err:
         raise Exception('Error in module/\n {}'.format(str(err)))
 
