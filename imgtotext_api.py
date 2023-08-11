@@ -9,9 +9,19 @@ token = os.getenv("HF_TOKEN")
 headers = {"Authorization": f"Bearer {token}"}
 LOAD_URL = "https://api-inference.huggingface.co/models/"
 
+def measure_response_time(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        end_time = time.time()
+        response_time = round(end_time - start_time, 2)
+        return result, response_time
+    return wrapper
+
 
 # run inference on HuggingFace API and return image summary as list of dicts
 # API will cache result by default, forcing model output to be deterministic
+@measure_response_time
 def inference_file(model_id, filename):
     api_url = LOAD_URL + model_id
 
@@ -20,7 +30,7 @@ def inference_file(model_id, filename):
     response = requests.post(api_url, headers=headers, data=data, timeout=8)
     return json.loads(response.content.decode("utf-8"))
 
-
+@measure_response_time
 def inference_url(model_id, image_url):
     try:
         api_url = "https://api-inference.huggingface.co/models/" + model_id
@@ -58,3 +68,5 @@ def inference_url(model_id, image_url):
 
         else:
             raise Exception(error_message)
+
+

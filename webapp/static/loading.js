@@ -27,7 +27,9 @@ function processImage() {
                 const queryParams = new URLSearchParams({
                     image_url: imageUrl,
                     summary: JSON.stringify(response['summary']),
-                    caption_list: JSON.stringify(response['caption_list'])
+                    sum_response_time: JSON.stringify(response['sum_response_time']),
+                    caption_list: JSON.stringify(response['caption_list']),
+                    cap_response_time: JSON.stringify(response['cap_response_time']),
                 });
                 window.location.href = '/results?' + queryParams.toString();
             } catch (error) {
