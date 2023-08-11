@@ -22,12 +22,15 @@ function processImage() {
             try {
                 console.log(xhr.responseText);
                 const response = JSON.parse(xhr.responseText);
-    
-                // Redirect to the Results page with the witty captions
-                window.location.href = '/results?image_url=' + encodeURIComponent(imageUrl) +
-                    '&caption_list=' + encodeURIComponent(JSON.stringify(response.captions));
+
+                // Redirect to the Results page with the captions and summary
+                const queryParams = new URLSearchParams({
+                    image_url: imageUrl,
+                    summary: JSON.stringify(response['summary']),
+                    caption_list: JSON.stringify(response['caption_list'])
+                });
+                window.location.href = '/results?' + queryParams.toString();
             } catch (error) {
-                // Handle JSON parsing error
                 console.error('Error parsing JSON response:', error);
             }
         } else if (xhr.status === 400) {
@@ -38,17 +41,8 @@ function processImage() {
             } catch (error) {
                 console.error('Error handling error response:', error);
             }
-        
-        // delete this
-
         } else {
-            // Handle errors if necessary
-            console.error('Error:', xhr.status);
-    
-            // Redirect to the error page or display an error message to the user
-            // The ? indicates the start of query parameters in the URL.
-            window.location.href = '/error?error_message=' + encodeURIComponent('Other error');
-        }
+            console.error('Non-200 or 400 HTTP response:', xhr.status);        }
     };
 }
 

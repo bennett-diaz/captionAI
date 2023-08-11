@@ -25,7 +25,6 @@ def inference_url(model_id, image_url):
     try:
         api_url = "https://api-inference.huggingface.co/models/" + model_id
 
-        # Get image data in binary format (i.e. bytes)
         img = requests.get(image_url, timeout=8).content
 
         response = requests.post(api_url, headers=headers, data=img, timeout=8)
