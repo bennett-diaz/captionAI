@@ -25,12 +25,11 @@ def inference_url(model_id, image_url):
     try:
         api_url = "https://api-inference.huggingface.co/models/" + model_id
 
-        # Get image data in binary format (i.e. bytes)
         img = requests.get(image_url, timeout=8).content
 
         response = requests.post(api_url, headers=headers, data=img, timeout=8)
         response.raise_for_status()
-        return response.json()
+        return response
 
     except requests.exceptions.HTTPError as err:
         current_filename = os.path.basename(__file__)
@@ -51,7 +50,7 @@ def inference_url(model_id, image_url):
                         api_url, headers=headers, data=img, timeout=load_time
                     )
                     response.raise_for_status()
-                    return response.json()
+                    return response
                 except requests.exceptions.HTTPError:
                     retry += 1
 
