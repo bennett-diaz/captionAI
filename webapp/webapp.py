@@ -49,10 +49,10 @@ def process_image_route():
         if image_url:
             try:
                 # Process the image and generate captions
-                summary, caption_list = process_image(image_url)
+                summary, sum_response_time, caption_list, cap_response_time = process_image(image_url)
 
                 # Return the captions as a JSON response
-                return jsonify({"summary": summary, "caption_list": caption_list})
+                return jsonify({"summary": summary, "sum_response_time": sum_response_time, "caption_list": caption_list, "cap_response_time": cap_response_time})
 
             except Exception as err:
                 error_message = "Error in process_image/\n" + str(err)
@@ -65,7 +65,9 @@ def process_image_route():
 def results_page():
     image_url = request.args.get("image_url")
     summary = request.args.get("summary")
+    sum_response_time = request.args.get("sum_response_time")
     caption_list = request.args.get("caption_list")
+    cap_response_time = request.args.get("cap_response_time")
 
     if image_url and caption_list:
         # Convert the caption list from string to list
@@ -75,7 +77,9 @@ def results_page():
             "results.html",
             image_url=image_url,
             summary=summary,
+            sum_response_time=sum_response_time,
             caption_list=caption_list,
+            cap_response_time=cap_response_time,
         )
 
     return jsonify({"error": "Invalid request."}), 400
@@ -90,7 +94,8 @@ def error_page():
 
 def process_image(image_url):
     try:
-        response = imgtotext_api.inference_url(imgtotext_model, image_url)
+        response, sum_response_time = imgtotext_api.inference_url(imgtotext_model, image_url)
+        print("Sum response time", sum_response_time)
         summary_str = response.text
         summary_dict = json.loads(summary_str)
         summary = summary_dict[0]["generated_text"]
@@ -99,10 +104,11 @@ def process_image(image_url):
         prompt = captioner_gpt.create_prompt(summary)
 
         # Request captions from GPT
-        caption_list = captioner_gpt.generate_caption(
+        caption_list, cap_response_time = captioner_gpt.generate_caption(
             captioner_model, prompt, temp, num_completions
         )
-        return summary, caption_list
+        print("Cap response time", cap_response_time)
+        return summary, sum_response_time, caption_list, cap_response_time
     except Exception as err:
         raise Exception("Error in module/\n {}".format(str(err)))
 
