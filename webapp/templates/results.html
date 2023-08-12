@@ -14,7 +14,7 @@
     <div class="result-section">
         <div class="image-container">
             <h2>Your requested image:</h2>
-            <img src="{{ image_url }}" alt="Uploaded Image">
+            <img src="{{ image_url }}" alt="Uploaded Image" height="400" width="400">
         </div>
 
         <div class="captions-container">
@@ -31,6 +31,9 @@
             <p>Summary: {{ summary}}</p>  
             <p><em>Summary API response time: {{ sum_response_time }} seconds</em></p>
         </div>
+    </div>
+    <div class = "footer">
+        <a href="{{ url_for('landing_page') }}">Return to home</a>
     </div>
 </body>
 </html>
