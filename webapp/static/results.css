@@ -10,6 +10,12 @@ h1 {
     color: #007bff;
 }
 
+h2 {
+    margin: 20px 0px 10px 0px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -29,15 +35,22 @@ h1 {
     margin: 10px 0;
 }
 
+.metadata{
+    margin-top: 20px 0;
+    font-style: italic;
+}
+
 .result-section {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    align-items: flex-start; /* Align headers at the same height vertically */
+    align-items: flex-start;
+    /* Align headers at the same height vertically */
 }
 
 .result-section h1 {
-    text-align: center; /* Center align the h1 */
+    text-align: center;
+    /* Center align the h1 */
 }
 
 .result-section h2 {
@@ -59,7 +72,7 @@ h1 {
 }
 
 .spacing {
-    width: 20px; /* Add spacing between left and right sections */
+    width: 20px;
 }
 
 .footer {
