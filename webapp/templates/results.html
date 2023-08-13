@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>CaptionAI - Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
 
-   
+
 </head>
+
 <body>
     <div class="container">
         <h1>Your results are in!</h1>
@@ -20,20 +22,18 @@
         <div class="captions-container">
             <h2>Your witty captions:</h2>
             {% for caption in caption_list %}
-                <p class="caption">{{ caption["message_content"] }}</p> 
+            <p class="caption">{{ caption["message_content"] }}</p>
             {% endfor %}
-            <p><em>Caption API response time: {{ cap_response_time }} seconds</em></p>
-
-            
-
+            <p class ="metadata">Caption API response time: {{ cap_response_time }} seconds</p>
             <br>
             <h2>Info on the summarizer:</h2>
-            <p>Summary: {{ summary}}</p>  
-            <p><em>Summary API response time: {{ sum_response_time }} seconds</em></p>
+            <p class = "caption">Summary: {{ summary}}</p>
+            <p class ="metadata">Summary API response time: {{ sum_response_time }} seconds</p>
         </div>
     </div>
-    <div class = "footer">
+    <div class="footer">
         <a href="{{ url_for('landing_page') }}">Return to home</a>
     </div>
 </body>
+
 </html>
