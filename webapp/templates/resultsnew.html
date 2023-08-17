@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Results New</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="resultsnew.css">
+</head>
+
+<body>
+    <h1 class="banner">Your results are in!</h1>
+    <div class="container-fluid text-center results-section">
+        <div class="row test-section">
+            <div class="col-2 cell">Summarizer Model</div>
+            <div class="col cell">Generated Summary</div>
+            <div class="col-2 cell">Captioner Model</div>
+            <div class="col cell">Generated Captions</div>
+        </div>
+        <div class="row" id="table-header">
+            <div class="col-2 card text-bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Summarizer Model</h5>
+                </div>
+            </div>
+            <div class="col-2 card text-bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Generated Summary</h5>
+                </div>
+            </div>
+            <div class="col-2 card text-bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Captioner Model</h5>
+                </div>
+            </div>
+            <div class="col card text-bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Generated Captions</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="first-results">
+            <div class="col-2 card text-bg-light">
+                <div class="card-body">
+                    <h6 class="card-text">IMGTXT_MODEL_GITBASE</h6>
+                </div>
+                <div class="card-footer">sumResponseTime: 31.95</div>
+            </div>
+            <div class="col-2 card text-bg-light">
+                <div class="card-body">
+                    <h6 class="card-text ">Summary: "cookies and oats on a wooden table"</h6>
+                </div>
+            </div>
+            <div class="col-2 card text-bg-light">
+                <div class="card-body">
+                    <h6 class="card-text">CAPTIONER_MODEL_GPT</h6>
+                </div>
+                <div class="card-footer">sumResponseTime: 2.57</div>
+            </div>
+            <div class="col card text-bg-empty">
+                <div class="card-body bubble mb-2">
+                    <h6 class="card-text">"Cookies and oats - the perfect fuel for a cozy day."</h6>
+                </div>
+                <div class="card-body bubble mb-2">
+                    <h6 class="card-text">"Savoring the sweet aroma of freshly baked goodies on this cozy morning. 🍪✨"</h6>
+                </div>
+                <div class="card-body bubble">
+                    <h6 class="card-text">"Indulging in the perfect combination: cookies and oats 🍪🌾 #TreatYourself"</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
