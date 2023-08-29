@@ -23,7 +23,7 @@ function processImage() {
                 console.log(xhr.responseText);
                 const response = JSON.parse(xhr.responseText);
 
-                // Redirect to the Results page with the captions and summary
+                // !Will need to put all query params here for all models
                 const queryParams = new URLSearchParams({
                     image_url: imageUrl,
                     summary: JSON.stringify(response['summary']),
